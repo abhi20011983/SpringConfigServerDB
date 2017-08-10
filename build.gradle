@@ -18,9 +18,9 @@ war {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
-repositories { mavenCentral() 
- maven { url "http://vpna-cor-mvn001:8081/artifactory/jcenter" }
-        maven { url "http://vpna-cor-mvn001:8081/artifactory/iss-artifactory" }
+repositories {
+mavenCentral() 
+//connect to your local maven repo or available repos for this to be faster
 }
 
 dependencies {
