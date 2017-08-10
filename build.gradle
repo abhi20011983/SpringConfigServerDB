@@ -37,6 +37,7 @@ dependencies {
     compile('org.springframework.cloud:spring-cloud-config-server')
     compile("org.springframework.boot:spring-boot-starter-data-jpa")  
    compile("org.springframework.boot:spring-boot-starter-security")
+   //this below is the sql driver, replace this with anything you want and update application.properties
         compile("sqljdbc4:sqljdbc4:4.0")
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
