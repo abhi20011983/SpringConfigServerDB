@@ -1,0 +1,58 @@
+buildscript {
+    ext { springBootVersion = '1.4.5.RELEASE' }
+    repositories { mavenCentral() }
+    
+    dependencies { classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
+
+war {
+    baseName = 'config-server'
+    version = '1.0'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories { mavenCentral() 
+ maven { url "http://vpna-cor-mvn001:8081/artifactory/jcenter" }
+        maven { url "http://vpna-cor-mvn001:8081/artifactory/iss-artifactory" }
+}
+
+dependencies {
+
+  
+    compile("org.springframework.boot:spring-boot-starter-web"){
+       exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+       
+       exclude(module: 'spring-boot-starter-tomcat')
+       exclude(group: 'org.apache.tomcat.embed')
+       exclude module: 'logback-classic' 
+    }
+
+    compile('org.springframework.cloud:spring-cloud-config-server')
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")  
+   compile("org.springframework.boot:spring-boot-starter-security")
+        compile("sqljdbc4:sqljdbc4:4.0")
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:Camden.SR5"
+      // mavenBom "org.springframework.cloud:spring-cloud-starter-parent:Brixton.SR1" 
+    }
+}
+
+
+eclipse {
+    classpath {
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}
+
