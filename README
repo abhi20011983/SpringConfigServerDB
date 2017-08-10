@@ -1,2 +1,25 @@
 # SpringConfigServerDB
-A Config Server backed by a DB
+A simple Config Server backed by a DB. Here below is a sample schema for the table you need to create:
+
+DBname:Configs
+
+
+-- Here "seedproject" is the name of your project-- you need to specify the app properties in a key=value format, id is used for ordering.
+CREATE TABLE [dbo].[seedproject](
+	[key] [varchar](500) NULL,
+	[value] [varchar](500) NULL,
+	[id] [int] NULL
+) 
+
+
+--Once done you can access the properties for seedProject like this: http://#hostname#:#port#/#contextName#/seedproject/default
+
+
+PS:
+
+THese are the properties you will need to set for the applications who wish to use the config server
+
+   -Dspring.cloud.config.uri=http://hostname:port/configServer \
+   -Dspring.cloud.config.username=config \
+   -Dspring.cloud.config.password=secure
+
